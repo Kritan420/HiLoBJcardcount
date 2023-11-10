@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.lang.Math;   
 
 public class HiLoCardCounter {
     private int count = 0;  
@@ -12,7 +13,6 @@ public class HiLoCardCounter {
     private int midcards = 12 * decks;
     private int highcards = 20 * decks;
     private int baselineBet = 10;
-
     private double trueCount = 0; 
     private JLabel emptyLabel;
     private JLabel countLabel;
@@ -151,7 +151,7 @@ public class HiLoCardCounter {
         countLabel.setText("Count: " + count);
         double remainingCards = cards;
         double remainingDecks = remainingCards / 52.0;
-        trueCount = (double) count / remainingDecks; 
+        trueCount = (double) count / remainingDecks + Math.random(); 
         trueCountLabel.setText("True Count: " + trueCount);
         predictionLabel.setText("Card Prediction: " + getCardPrediction());
         advantageLabel.setForeground(Color.GRAY);
@@ -178,13 +178,13 @@ public class HiLoCardCounter {
         highCountLabel.setText("High Cards: " + highcards);
 
         int betSize = 0;
-        if (trueCount < 1) {
+        if (trueCount < 2) {
             betSize = baselineBet;
-        } else if (trueCount >= 1 && trueCount < 2) {
+        } else if (trueCount >= 3 && trueCount < 3) {
             betSize = baselineBet * 2;
-        } else if (trueCount >= 2 && trueCount < 3) {
+        } else if (trueCount >= 3 && trueCount < 4) {
             betSize = baselineBet * 3;
-        } else if (trueCount >= 3) {
+        } else if (trueCount >= 4) {
             betSize = baselineBet * 4;
         }
         betSizeLabel.setText("Bet Size: " + betSize);
